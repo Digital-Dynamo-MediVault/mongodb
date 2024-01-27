@@ -15,6 +15,7 @@ const patientSchema = new mongoose.Schema({
     age: { type: String, required: true },
     gender: { type: String, required: true },
     email: { type: String, required: true, default: '0000-0000-0000' },
+    phone: { type: Number, required: true },
     addressp: { type: String, required: true },
     bloodGroup: { type: String, required: true },
     guardian: { type: String, required: true },

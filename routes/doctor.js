@@ -3,7 +3,7 @@ const router = require('express').Router();
 let nodemailer = require('nodemailer')
 require('dotenv').config();
 
-const UserAccount = require('../models/patient.model');
+const UserAccount = require('../models/doctor.modal');
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -11,9 +11,9 @@ const transporter = nodemailer.createTransport({
         pass: 'vfcxgfbeddekykaz'
     }
 });
-router.post('/addpatient', async (req, res) => {
+router.post('/adddoctor', async (req, res) => {
     try {
-        const { name, age, gender, email, addressp, bloodGroup, guardian, guardianp, phone } = req.body;
+        const { name, age, gender, email, exprience, specialization, phone } = req.body;
         const generatePatientId = () => {
 
             const randomNumber = Math.floor(1000 + Math.random() * 9000); // Generates a random 4-digit number
@@ -22,15 +22,13 @@ router.post('/addpatient', async (req, res) => {
         };
         // Create a new user
         const newUser = new UserAccount({
-            pId: generatePatientId(),
+            dId: generatePatientId(),
             name,
             age,
             gender,
             email,
-            addressp,
-            bloodGroup,
-            guardian,
-            guardianp,
+            exprience,
+            specialization,
             phone
         });
 
@@ -39,18 +37,16 @@ router.post('/addpatient', async (req, res) => {
 
         // Send email to the user
         const mailOptions = {
-            from: 'your-email@gmail.com', // Replace with your Gmail email address
+            from: 'sanskargupta0901@gmail.com', // Replace with your Gmail email address
             to: savedUser.email,
             subject: 'Welcome to Our MediVault',
-            text: `Thank you for registering with us! Click the following link to activate your account: https://medivault-web.vercel.app/activate?email=${savedUser.email}&role=patient`
+            text: `Thank you for registering with us! Click the following link to activate your account: https://medivault-web.vercel.app/activate?email=${savedUser.email}&role=doctor`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {
-                // console.error('Error sending email:', error);
                 res.status(500).json({ message: 'Error sending email' });
             } else {
-                // console.log('Email sent:', info.response);
                 res.status(200).json({ message: 'User added successfully and email sent' });
             }
         });

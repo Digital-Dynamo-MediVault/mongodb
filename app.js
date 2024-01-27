@@ -25,8 +25,10 @@ mongoose.connection.once('open', () => {
 })
 
 
-const user = require('./routes/patient');
-app.use('/patient', user)
+const patient = require('./routes/patient');
+app.use('/patient', patient)
+const doctor = require('./routes/doctor');
+app.use('/doctor', doctor)
 
 
 
