@@ -29,6 +29,8 @@ const patient = require('./routes/patient');
 app.use('/patient', patient)
 const doctor = require('./routes/doctor');
 app.use('/doctor', doctor)
+const cases = require('./routes/case');
+app.use('/case', cases)
 
 
 
