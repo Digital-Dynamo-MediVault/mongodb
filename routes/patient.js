@@ -75,6 +75,22 @@ router.post('/activate', async (req, res) => {
         res.status(500).json({ message: 'Error activating user' });
     }
 })
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try {
+        const user = await UserAccount.findOne({ email: email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        if (user.password !== password) {
+            return res.status(401).json({ message: 'Invalid password' });
+        }
+        res.status(200).json({ message: 'Login successful', user: user });
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).json({ message: 'Error logging in' });
+    }
+})
 
 
 module.exports = router;
