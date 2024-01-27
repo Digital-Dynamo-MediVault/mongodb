@@ -64,7 +64,7 @@ router.get('/patient/:doctorId', async (req, res) => {
     const { doctorId } = req.params;
 
     try {
-        const cases = await Case.find({ doctor: doctorId, attended: false });
+        const cases = await Case.find({ doctor: doctorId });
 
         const patientPIds = cases.map(caseData => caseData.pId);
 
