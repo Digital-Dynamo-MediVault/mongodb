@@ -28,6 +28,26 @@ router.post('/doctor', async (req, res) => {
     })
 })
 
+router.post('/addextrasymptom', async (req, res) => {
+    const { symptom, pId } = req.body;
 
+    try {
+        // Find the case by pId
+        const existingCase = await Case.findOne({ pId: pId });
+
+        if (!existingCase) {
+            return res.status(404).json({ message: 'Case not found' });
+        }
+
+        existingCase.extraSymptom.push(symptom);
+
+        await existingCase.save();
+
+        res.status(200).json({ message: 'New string added to extra array', data: existingCase });
+    } catch (error) {
+        console.error('Error adding new string to extra array:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 module.exports = router;

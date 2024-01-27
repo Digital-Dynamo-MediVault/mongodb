@@ -5,7 +5,7 @@ const caseSchema = new mongoose.Schema({
     problemDescription: { type: String, required: true },
     doctor: { type: String, required: true },
     symptoms: { type: String, required: true },
-    extra: { type: [String] }
+    extraSymptom: { type: [String] }
 
 });
 
