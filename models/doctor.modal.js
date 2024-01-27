@@ -12,6 +12,7 @@ const doctorSchema = new mongoose.Schema({
     exprience: { type: Number, required: true },
     specialization: { type: String, required: true },
     metamaskAddress: { type: String },
+    password: { type: String },
 });
 
 
