@@ -41,7 +41,7 @@ router.post('/addpatient', async (req, res) => {
             from: 'your-email@gmail.com', // Replace with your Gmail email address
             to: savedUser.email,
             subject: 'Welcome to Our MediVault',
-            text: `Thank you for registering with us! Click the following link to activate your account: http://localhost:3000/activate?email=${savedUser.email}`
+            text: `Thank you for registering with us! Click the following link to activate your account: https://medivault-web.vercel.app/activate?email=${savedUser.email}`
         };
 
         transporter.sendMail(mailOptions, (error, info) => {
