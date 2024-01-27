@@ -11,6 +11,7 @@ const Address = {
 const patientSchema = new mongoose.Schema({
     pId: { type: Number, required: true },
     name: { type: String, required: true },
+    password: { type: String },
     age: { type: String, required: true },
     gender: { type: String, required: true },
     email: { type: String, required: true, default: '0000-0000-0000' },

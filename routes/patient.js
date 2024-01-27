@@ -58,7 +58,23 @@ router.post('/addpatient', async (req, res) => {
         res.status(500).json({ message: 'Error adding user' });
     }
 });
-
+router.post('/activate', async (req, res) => {
+    const { password, metamaskAddress, email } = req.body;
+    try {
+        const user = await UserAccount.findOne({ email: email });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        user.password = password;
+        user.metamaskAddress = metamaskAddress;
+        await user.save();
+        res.status(200).json({ message: 'User activated successfully', user: user });
+    }
+    catch (error) {
+        console.error('Error activating user:', error);
+        res.status(500).json({ message: 'Error activating user' });
+    }
+})
 
 
 module.exports = router;
