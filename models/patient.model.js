@@ -1,13 +1,4 @@
 const mongoose = require('mongoose');
-
-const Address = {
-    block: { type: String },
-    street: { type: String },
-    city: { type: String },
-    state: { type: String },
-    zip: { type: String },
-    country: { type: String }
-}
 const patientSchema = new mongoose.Schema({
     pId: { type: Number, required: true },
     name: { type: String, required: true },
