@@ -12,6 +12,7 @@ const patientSchema = new mongoose.Schema({
     guardian: { type: String, required: true },
     guardianp: { type: Number, required: true },
     metamaskAddress: { type: String },
+    report: { type: [String] }
 });
 
 

@@ -76,6 +76,21 @@ router.post('/activate', async (req, res) => {
         res.status(500).json({ message: 'Error activating user' });
     }
 })
+router.post('/addreport', async (req, res) => {
+    try {
+        const { pId, report } = req.body;
+        const user = await UserAccount.findOne({ pId: pId });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        user.report.push(report);
+        await user.save();
+        res.status(200).json({ message: 'Report added successfully', user: user });
+    } catch (error) {
+        console.error('Error adding report:', error);
+        res.status(500).json({ message: 'Error adding report' });
+    }
+})
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
     try {
