@@ -107,4 +107,13 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ message: 'Error logging in' });
     }
 })
+router.get('/', async (req, res) => {
+    try {
+        const user = await UserAccount.find();
+        res.status(200).json({ message: 'User Details', user: user });
+    } catch (error) {
+        console.error('Error logging in:', error);
+        res.status(500).json({ message: 'Errorgetting details' });
+    }
+})
 module.exports = router;
