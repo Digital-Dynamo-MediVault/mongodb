@@ -84,7 +84,7 @@ router.get('/patient/:doctorId', async (req, res) => {
 router.get('/:pId', async (req, res) => {
     const { pId } = req.params;
     try {
-        const caseData = await Case.findOne({ pId: pId });
+        const caseData = await Case.find({ pId: pId });
         if (!caseData) {
             return res.status(404).json({ message: 'Case not found' });
         }
