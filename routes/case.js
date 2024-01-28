@@ -81,6 +81,26 @@ router.get('/patient/:doctorId', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-
+router.get('/:pId', async (req, res) => {
+    const { pId } = req.params;
+    try {
+        const caseData = await Case.findOne({ pId: pId });
+        if (!caseData) {
+            return res.status(404).json({ message: 'Case not found' });
+        }
+        res.status(200).json({ data: caseData });
+    } catch (error) {
+        console.error('Error fetching case:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+})
+router.post('/attended', async (req, res) => {
+    const { cId } = req.body;
+    Case.findOne({ cId: cId }).then(data => {
+        data.attended = true;
+        data.save();
+        res.status(200).json({ message: "Case attended" })
+    })
+})
 
 module.exports = router;
